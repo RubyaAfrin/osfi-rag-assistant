@@ -1,4 +1,4 @@
-[README.md](https://github.com/user-attachments/files/34048891/README.md)
+(https://github.com/user-attachments/files/34048891/README.md)
 # OSFI_RAG_Assistant# OSFI Regulation Assistant
 
 A retrieval-augmented generation (RAG) system that answers questions about Canadian mortgage and model-risk regulation using **only official OSFI guidelines**, with a citation to the exact section behind every statement. It refuses questions the documents can't answer.
