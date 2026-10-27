@@ -1,0 +1,29 @@
+# Runs the API together with an Ollama server for the LLM.
+#   1. Build the index first:  python scripts/build_index.py --chunks <chunks.jsonl> --out index
+#   2. docker compose up --build
+#   3. docker compose exec ollama ollama pull qwen2.5:7b     (first run only)
+#   4. Open http://localhost:8000/docs
+services:
+  ollama:
+    image: ollama/ollama
+    volumes:
+      - ollama-models:/root/.ollama
+    ports:
+      - "11434:11434"
+
+  api:
+    build: .
+    depends_on:
+      - ollama
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      OSFI_LLM_MODEL: qwen2.5:7b
+    volumes:
+      - ./index:/app/index:ro
+      - hf-cache:/app/.cache/huggingface
+    ports:
+      - "8000:8000"
+
+volumes:
+  ollama-models:
+  hf-cache:
